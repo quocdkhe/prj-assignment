@@ -1,6 +1,6 @@
-# Hướng Dẫn Chạy Dự Án
+# Hướng Dẫn Chạy Project
 
-## Các bước để chạy dự án:
+## Các bước để chạy project:
 
 ### Bước 1:
 Chạy file **DBScript** để khởi tạo cơ sở dữ liệu.

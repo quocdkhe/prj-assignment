@@ -70,12 +70,17 @@
                             </li> 
                         </c:forEach>
 
+                        <li class="list-group-item d-flex justify-content-between">
+                            <h6 class="my-0">Phí vận chuyển: </h6>
+                            <span>0 VNĐ</span>
+                        </li>
 
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Tổng: </span>
                             <strong value ="" id = "sum" class="price"></strong>
                         </li>
                     </ul>
+                    <p><strong>Hình thức thanh toán:</strong> Thanh toán khi nhận hàng</p>
                 </div>
             </div>
         </div>

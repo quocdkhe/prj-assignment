@@ -171,9 +171,9 @@
                         }
                         return;
                     }
-
-                    calculatePrices();
-
+                    calculatePrices(); //Sau khi người dùng thay đổi thông tin quantity, 
+                    //chúng ta cần phải tính lại tổng giá tiền
+                    // Phần dưới để tương tác với database
                     $.ajax({
                         url: 'update-cart',
                         type: 'POST',

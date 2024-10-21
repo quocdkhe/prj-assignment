@@ -23,12 +23,12 @@
                                 <h2 class="text-center">Đăng nhập</h2>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input name="email" type="email" class="form-control" id="email"
+                                    <input value="${emailCookie}" name="email" type="email" class="form-control" id="email"
                                            placeholder="Email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Mật khẩu</label>
-                                    <input name="password" type="password" class="form-control"
+                                    <input value="${passwordCookie}" name="password" type="password" class="form-control"
                                            id="password" placeholder="Mật khẩu" required>
                                 </div>
                                 <div class="mb-3 form-check">
@@ -59,9 +59,9 @@
                     //Get data from form 
                     var formData = {
                         email: $('#email').val(),
-                        password: $('#password').val()
+                        password: $('#password').val(),
+                        rememberMe: $('#rememberMe').val()
                     };
-
 
                     $.ajax({
                         url: 'login',

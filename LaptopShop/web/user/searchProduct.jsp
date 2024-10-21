@@ -67,11 +67,8 @@
                         </select>
                     </div>
                 </div>
-
-
-
-
-
+                <br/> 
+                <button data-current-category="${currentCategory}" class="btn btn-primary" type="button" id="reset-button">Đặt lại</button>
             </form>
 
             <br/>
@@ -134,11 +131,18 @@
                 </li>
             </ul>
         </nav>
-    </div>
 
-    <jsp:include page="include/footer.jsp"/>
-    <script src="resources/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script src = "resources/script/jquery-3.7.1.min.js"></script>
-    <script src="resources/script/script.js"></script>
-</body>
+        <jsp:include page="include/footer.jsp"/>
+        <script src="resources/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+        <script src = "resources/script/jquery-3.7.1.min.js"></script>
+        <script src="resources/script/script.js"></script>
+        <script>
+                            $(document).ready(function () {
+                                $('#reset-button').click(function () {
+                                    let currentCategory = $(this).data('current-category');
+                                    window.location.href = "search-product?categorySelect=" + currentCategory;
+                                });
+                            });
+        </script>
+    </body>
 </html>

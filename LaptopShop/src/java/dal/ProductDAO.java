@@ -91,7 +91,6 @@ public class ProductDAO extends DBContext {
         } else {
             sql += " ORDER BY [id]"; // Mặc định nếu không chỉ định sắp xếp
         }
-
         // Phân trang
         String pagination = """
                         OFFSET ? ROWS

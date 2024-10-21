@@ -12,9 +12,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Timestamp;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import model.Order;
 import model.OrderDetail;
 import model.Product;
@@ -304,10 +305,10 @@ public class OrderDAO extends DBContext {
         String sql = """
                         UPDATE [dbo].[product]
                         SET
-                            [units_sold] =? ,
+                            [units_sold] = ? ,
                             [stock_units] = [stock_units] - ?
                         WHERE [id] = ?
-					""";
+                        """;
         List<OrderDetail> orderDetailList = getOrderDetailByOrderId(orderId);
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -323,7 +324,22 @@ public class OrderDAO extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public void insertIntoIncome() {
+        String sql = """
+                        INSERT INTO income (date, total)
+                        SELECT TOP 1 received_date, total
+                        FROM [order]
+                        WHERE [order_status] = 'Completed' 
+                        ORDER BY [id] DESC;
+                     """;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void updateOrderStatus(int orderId, String note, String status) {
@@ -346,6 +362,7 @@ public class OrderDAO extends DBContext {
             st.setString(3, note);
             st.setInt(4, orderId);
             st.executeUpdate();
+            insertIntoIncome();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -359,7 +376,7 @@ public class OrderDAO extends DBContext {
 
                 DELETE FROM [dbo].[order]
                 WHERE [id] = ?
-                        """;
+                """;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, orderId);
@@ -437,4 +454,30 @@ public class OrderDAO extends DBContext {
         return count;
     }
 
+    public Map<String, Double> getStatistics() {
+        Map<String, Double> statistics = new HashMap<>();
+        String sql = """
+                     SELECT FORMAT([date], 'MM/yyyy') AS month_year, SUM(total) AS total
+                     FROM [dbo].[income]
+                     GROUP BY FORMAT([date], 'MM/yyyy')
+                     ORDER BY month_year;
+                     """;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String month_year = rs.getString("month_year");
+                double income = rs.getDouble("total") / 1000000;
+                statistics.put(month_year, income);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return statistics;
+    }
+
+    public static void main(String[] args) {
+        new OrderDAO().insertIntoIncome();
+    }
 }

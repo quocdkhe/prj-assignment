@@ -38,10 +38,10 @@ public class LoginServlet extends HttpServlet {
         if (allCookies != null) {
             for (Cookie cookie : allCookies) {
                 if (cookie.getName().equals("email")) {
-                    request.setAttribute("emailCookie", cookie);
+                    request.setAttribute("emailCookie", cookie.getValue());
                 }
                 if (cookie.getName().equals("password")) {
-                    request.setAttribute("passwordCookie", cookie);
+                    request.setAttribute("passwordCookie", cookie.getValue());
                 }
             }
         }

@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Quoc
  */
-@WebFilter(filterName = "SessionFilter", servletNames = {"AdminManager", "FeedbackManager", "AccountManager", "BrandManager", "CategoryManager", "ProductManager", "OrderManager", "ContactServlet", "AddToCart", "ContactHistory", "SendFeedback", "DeliveringManager", "ShipperManager"})
+@WebFilter(filterName = "SessionFilter", servletNames = {"AdminManager", "FeedbackManager", "AccountManager", "BrandManager", "CategoryManager", "ProductManager", "OrderManager", "ContactServlet", "AddToCart", "ContactHistory", "SendFeedback", "DeliveringManager", "ShipperManager", "Income"})
 public class SessionFilter implements Filter {
 
     private static final boolean debug = true;

@@ -173,6 +173,7 @@ public class ProductManager extends HttpServlet {
                         Part filePart = request.getPart("image"); // "image" is the name of the input field
                         String image = getAndSaveImg(filePart);
                         pdao.addProduct(cpu, price, stockUnits, batteryCapacity, operatingSystem, screen, ram, productName, design, warranty, info, 1, brandId, image, vga, hardDrive);
+                        response.sendRedirect("product-manager?categorySelect=1");
                     }
                     case "addOther" -> {
                         String productName = request.getParameter("otherName");
@@ -186,6 +187,7 @@ public class ProductManager extends HttpServlet {
                         Part filePart = request.getPart("otherImage"); // "image" is the name of the input field in the form
                         String image = getAndSaveImg(filePart);
                         pdao.addProduct(productName, brandId, categoryId, price, generalInfo, warrantyInfo, stockUnits, image);
+                        response.sendRedirect("product-manager?categorySelect=" + categoryId);
                     }
                 }
             } catch (NumberFormatException e) {
@@ -224,6 +226,7 @@ public class ProductManager extends HttpServlet {
                     deleteFile(imgPath);
                 }
                 pdao.updateLaptop(id, cpu, price, stockUnits, batteryCapacity, operatingSystem, screen, ram, productName, design, warrantyInfo, image, generalInfo, brandId, vga, hardDrive);
+                response.sendRedirect("product-manager?categorySelect=1");
             } catch (NumberFormatException e) {
                 System.out.println(e);
             }
@@ -234,13 +237,10 @@ public class ProductManager extends HttpServlet {
             try {
 
                 int id = Integer.parseInt(updateOther);
-
                 String productName = request.getParameter("newName");
                 int price = Integer.parseInt(request.getParameter("newPrice"));
                 int brandId = Integer.parseInt(request.getParameter("newBrand"));
-
                 int categoryId = Integer.parseInt(request.getParameter("newCategory"));
-                request.setAttribute("message", "I'm here");
                 String generalInfo = request.getParameter("newInfo");
                 String warrantyInfo = request.getParameter("newWarranty");
                 int stockUnits = Integer.parseInt(request.getParameter("newStockUnits"));
@@ -252,6 +252,7 @@ public class ProductManager extends HttpServlet {
                     deleteFile(imgPath);
                 }
                 pdao.updateOther(id, productName, brandId, categoryId, price, generalInfo, warrantyInfo, stockUnits, image);
+                response.sendRedirect("product-manager?categorySelect=" + categoryId);
             } catch (NumberFormatException ex) {
                 System.out.println(ex);
             }

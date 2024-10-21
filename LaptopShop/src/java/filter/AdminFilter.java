@@ -24,7 +24,7 @@ import model.User;
  *
  * @author Quoc
  */
-@WebFilter(filterName = "AdminFilter", servletNames = {"AdminManager", "FeedbackManager", "AccountManager", "BrandManager", "CategoryManager", "ProductManager", "OrderManager"})
+@WebFilter(filterName = "AdminFilter", servletNames = {"AdminManager", "FeedbackManager", "AccountManager", "BrandManager", "CategoryManager", "ProductManager", "OrderManager", "Income"})
 public class AdminFilter implements Filter {
 
     private static final boolean debug = true;

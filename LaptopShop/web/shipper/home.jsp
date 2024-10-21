@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trang người giao hàng</title>
+        <title>Trang Shipper</title>
         <link rel="stylesheet" href="resources/bootstrap-5.3.3-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/bootstrap-5.3.3-dist/css/sidebars.css">
     </head>
@@ -18,7 +18,7 @@
         <main class="d-flex flex-nowrap">
             <jsp:include page="template/sidebar.jsp" />
             <div class="container mt-5">
-                <h3 class="mt-3">Đơn hàng đang chờ giao</h3>
+                <h3 class="mt-3">Đơn hàng được giao</h3>
                 <form class="container" action="delivering-manager" method="get">
                     <label class="form-label" for="status">Lọc theo trạng thái</label>
                     <select class="form-select" id="status" name="status">
@@ -104,14 +104,14 @@
                                                                             <tr>
                                                                                 <td>${index}</td>
                                                                                 <td>${od.product.productName}</td>
-                                                                                <td>${od.unitPrice}</td>
+                                                                                <td class="price">${od.unitPrice}</td>
                                                                                 <td>${od.quantity}</td>
                                                                             </tr>
                                                                             <c:set value="${index + 1}" var="index"/>
                                                                         </c:forEach>
                                                                         <tr class="text-center">
                                                                             <td colspan="2"><strong>Tổng</strong></td>
-                                                                            <td colspan="2">${o.total}</td>
+                                                                            <td class="price" colspan="2">${o.total}</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -168,7 +168,7 @@
                                                                             <tr>
                                                                                 <td>${index}</td>
                                                                                 <td>${od.product.productName}</td>
-                                                                                <td>${od.unitPrice}</td>
+                                                                                <td class="price">${od.unitPrice}</td>
                                                                                 <td>${od.quantity}</td>
                                                                             </tr>
                                                                             <c:set value="${index + 1}" var="index"/>

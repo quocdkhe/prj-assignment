@@ -84,7 +84,6 @@ public class UpdateCart extends HttpServlet {
                     json.put("success", false);
                 }
             }
-
             case "change-selected" -> {
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 int isSelected = Integer.parseInt(request.getParameter("isSelected"));

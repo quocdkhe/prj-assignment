@@ -233,9 +233,7 @@ public class ProductManager extends HttpServlet {
         }
 
         if (updateOther != null) {
-
             try {
-
                 int id = Integer.parseInt(updateOther);
                 String productName = request.getParameter("newName");
                 int price = Integer.parseInt(request.getParameter("newPrice"));
